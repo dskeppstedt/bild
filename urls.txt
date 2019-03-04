@@ -1,3 +1,8 @@
-http://google.se
+http://www.youtube.com
+http://www.facebook.com
+http://www.yahoo.com
+http://www.amazon.com
 http://dn.se
 http://duck.com
+http://aftonbladet.se
+http://twitter.com
