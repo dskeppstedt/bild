@@ -1,7 +1,7 @@
 package util
 
 import (
-	"log"
+	"io/ioutil"
 	"os"
 )
 
@@ -9,7 +9,14 @@ import (
 func OpenFile(filePath string) *os.File {
 	file, err := os.Open(filePath)
 	if err != nil {
-		log.Fatal(err)
+		panic(err)
 	}
 	return file
+}
+
+func WriteFile(filepath string, data []byte) {
+	err := ioutil.WriteFile(filepath, data, 0666)
+	if err != nil {
+		panic(err)
+	}
 }

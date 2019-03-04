@@ -3,6 +3,7 @@
 package main
 
 import (
+	"bild/pipeline"
 	"bild/util"
 	"bufio"
 	"fmt"
@@ -22,17 +23,21 @@ func main() {
 }
 
 func start(filePath string) {
+	var wg sync.WaitGroup
 	file := util.OpenFile(filePath)
 	defer file.Close()
 
 	scanner := bufio.NewScanner(file)
 	for scanner.Scan() {
 		//each url is sent to a goroutine.
+		wg.Add(1)
+		go pipeline.Pipeline(scanner.Text(), &wg)
 	}
 
 	if err := scanner.Err(); err != nil {
 		log.Fatal("Something went wrong while reading the file.", err)
 	}
 
+	wg.Wait()
 	fmt.Println("Bild is done...!")
 }
