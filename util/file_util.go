@@ -1,6 +1,7 @@
 package util
 
 import (
+	"fmt"
 	"io/ioutil"
 	"os"
 )
@@ -9,7 +10,8 @@ import (
 func OpenFile(filePath string) *os.File {
 	file, err := os.Open(filePath)
 	if err != nil {
-		panic(err)
+		fmt.Println("Failed to open file")
+		return nil
 	}
 	return file
 }
@@ -17,6 +19,6 @@ func OpenFile(filePath string) *os.File {
 func WriteFile(filepath string, data []byte) {
 	err := ioutil.WriteFile(filepath, data, 0666)
 	if err != nil {
-		panic(err)
+		fmt.Println("Failed to write file", err)
 	}
 }
